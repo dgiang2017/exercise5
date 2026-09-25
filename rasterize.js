@@ -123,7 +123,7 @@ function loadTriangles() {
             // set up the vertex coord array
             for (whichSetVert=0; whichSetVert<inputTriangles[whichSet].vertices.length; whichSetVert++) {
                 vtxToAdd = inputTriangles[whichSet].vertices[whichSetVert];
-                coordArray.push(vtxToAdd[0],vtxToAdd[1],vtxToAdd[2]);
+                coordArray.push(vtxToAdd[0]*2 - 2,vtxToAdd[1]*2 + 0.5,vtxToAdd[2]*2);
             } // end for vertices in set
             
             // set up the triangle index array, adjusting indices across sets
@@ -156,7 +156,7 @@ function setupShaders() {
     // define fragment shader in essl using es6 template strings
     var fShaderCode = `
         void main(void) {
-            gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0); // all fragments are white
+            gl_FragColor = vec4(0, 1, 1, 1.0); // all fragments are white
         }
     `;
     
@@ -165,7 +165,7 @@ function setupShaders() {
         attribute vec3 vertexPosition;
 
         void main(void) {
-            gl_Position = vec4(vertexPosition, 1.0); // use the untransformed position
+            gl_Position = vec4(vertexPosition, 3.0); // use the untransformed position
         }
     `;
     
